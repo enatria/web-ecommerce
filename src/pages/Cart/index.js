@@ -86,12 +86,14 @@ export default function Cart() {
     const stock = item.stock
     console.log('cart: ', cart)
     console.log('stock: ', item.stock)
-    dispatch(addData({
-      ...item,
-      cart,
-      stock,
-      countSales :item.countSales
-    }))
+    if (cart > 0) {
+      dispatch(addData({
+        ...item,
+        cart,
+        stock,
+        countSales :item.countSales
+      }))
+    }
     if (cart > stock) {
       toast.error(`${item.title} stock isnt available! Max ${stock} items`, {
         position: "top-right"
@@ -140,7 +142,7 @@ export default function Cart() {
                     </Box>
               </Box>
               </StyledTableCell>
-                    <StyledTableCell ><Input onChange={(e)=>handleChange(item, e)}label="Outlined secondary" type="number" color="secondary" value={item.cart}  />
+                    <StyledTableCell ><Input onChange={(e)=>handleChange(item, e)}label="Outlined secondary" type="number" color="secondary" value={item.cart} min="1" />
                       {item.cart > item.stock && <Typography variant="small" sx={{fontSize: 14, color: 'red', display: 'block'}}>Out of stock, can't continue buying</Typography>}
                     </StyledTableCell>
               <StyledTableCell >${item.price}</StyledTableCell>

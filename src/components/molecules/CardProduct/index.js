@@ -11,6 +11,7 @@ import { isAuthenticated } from '../../../config/authService';
 
 import { useDispatch } from 'react-redux';
 import { addData } from '../../../redux/productSlice';
+import { Rating } from '@mui/material';
 
 const useStyles = makeStyles({
     root: {
@@ -67,6 +68,8 @@ export default function CardProduct({data}) {
           Sales: ${data.totalSales}
         </Typography>
         </Box>
+
+        <Rating name="read-only" value={data.rating.rate} readOnly />
 
         <Typography variant="body2" sx={{maxHeight:'60px', minHeight:'60px', overflow:'hidden'}} color="text.secondary">
           {data.description}
