@@ -63,7 +63,7 @@ export default function Cart() {
   const handleCheckout = (item,e) => {
     e.preventDefault();
     filteredData?.map(item => { 
-      if (item.cart < item.stock) {
+      if (item.cart <= item.stock) {
         
         dispatch(checkout({
           ...item,
@@ -81,12 +81,22 @@ export default function Cart() {
     
   }
 
-  const handleChange = (item,e)=>{    dispatch(addData({
+  const handleChange = (item,e)=> {
+    const cart = e.target.value === 0 ? 0 : e.target.value
+    const stock = item.stock
+    console.log('cart: ', cart)
+    console.log('stock: ', item.stock)
+    dispatch(addData({
       ...item,
-      cart: e.target.value === 0 ? 0 :e.target.value,
-      stock: item.stock,
+      cart,
+      stock,
       countSales :item.countSales
     }))
+    if (cart > stock) {
+      toast.error(`${item.title} stock isnt available! Max ${stock} items`, {
+        position: "top-right"
+      })
+    }
   }
 
   
@@ -129,8 +139,8 @@ export default function Cart() {
                     </Box>
               </Box>
               </StyledTableCell>
-                    <StyledTableCell ><Input onChange={(e)=>handleChange(item, e)}label="Outlined secondary" type="number" color="secondary" value={item.cart} />
-                      {/* {item.cart > item.stock ? 'Stok habis, tidak bisa melanjutkan pembelian' : item.cart} */}
+                    <StyledTableCell ><Input onChange={(e)=>handleChange(item, e)}label="Outlined secondary" type="number" color="secondary" value={item.cart}  />
+                      {item.cart > item.stock && <Typography variant="small" sx={{fontSize: 14, color: 'red', display: 'block'}}>Out of stock, can't continue buying</Typography>}
                     </StyledTableCell>
               <StyledTableCell >${item.price}</StyledTableCell>
                     <StyledTableCell >${item.totalCart}</StyledTableCell>

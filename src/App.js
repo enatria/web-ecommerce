@@ -50,9 +50,9 @@ const theme = createTheme({
 
 const App = function () {
   return (
-   
+
     <ThemeProvider theme={theme}>
-       <ToastContainer theme="colored" autoClose={2000}/>
+      <ToastContainer theme="colored" autoClose={2000}/>
       <Router>
         <Suspense fallback={<div>loading...</div>}>
           <Switch>
