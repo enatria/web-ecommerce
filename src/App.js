@@ -6,6 +6,7 @@ import './App.css';
 import { Routes } from './routes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { LoaderCatalog } from './components/molecules';
 const Layout = React.lazy(() => import('./Layout'));
 // Custom Themes Material UI
 const theme = createTheme({
@@ -54,7 +55,7 @@ const App = function () {
     <ThemeProvider theme={theme}>
       <ToastContainer theme="colored" autoClose={2000}/>
       <Router>
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<LoaderCatalog/>}>
           <Switch>
             {
               Routes.map((route) => {

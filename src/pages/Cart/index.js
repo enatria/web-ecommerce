@@ -104,7 +104,8 @@ export default function Cart() {
   return (
       <Container>
       {
-        loading ? <p>loading...</p>
+        loading ?
+          'Loading Res...'
           : error ? <p>{error}</p>
             :<Box sx={{backgroundColor:'#fff', padding:4 , borderRadius:4}}>
             <Box sx={{marginBottom:3}}>
