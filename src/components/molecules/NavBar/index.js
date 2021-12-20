@@ -68,9 +68,7 @@ export default function Navbar() {
               alignItems: 'center',
             }}>
               <Brand />
-              <Box sx={{marginLeft:7}}>
-                <Link to="/">Home</Link>
-              </Box>
+             
               {
                   isAdmin() ?
                   <Box sx={{
@@ -85,7 +83,9 @@ export default function Navbar() {
                   <Box sx={{marginLeft:7}}>
                     <Link to="/rekap">Rekap Penjualan</Link>
                   </Box>
-                  </Box> : ""
+                  </Box> :  <Box sx={{marginLeft:7}}>
+                <Link to="/">Home</Link>
+              </Box>
                 }
             </Box>
             <Box sx={{

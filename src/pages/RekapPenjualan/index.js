@@ -11,6 +11,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import useFetch from '../../hook/useFetch';
 
+import { useHistory } from 'react-router-dom';
+import { isAdmin} from '../../config/authService';
 import { styled } from '@mui/styles';
 
 
@@ -39,6 +41,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 
 export default function RekapPenjualan() {
+  const history = useHistory();
+   if (!isAdmin()) {
+    history.push('/')
+}
   const URL  = `https://fakestoreapi.com/products`
   
   const { loading, error, data } = useFetch(URL)

@@ -15,6 +15,8 @@ import { isAuthenticated } from '../../config/authService';
 import { useDispatch } from 'react-redux';
 import { addData } from '../../redux/productSlice';
 
+import { Rating } from '@mui/material';
+
 const Content = ({data}) => {
     
     const [cart, setCart] = useState(data.cart)
@@ -64,8 +66,9 @@ const Content = ({data}) => {
                     <Box sx={{marginBottom:2}}>
                         <Typography variant="h3">{data?.title}</Typography>
                     </Box>
-                    <Box sx={{marginBottom:2}}>
+                    <Box sx={{marginBottom:2,  display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                             <Typography variant="span" sx={{fontWeight:'fontWeightBold', fontSize:"35px"}}>${data?.price}</Typography>
+                            <Rating name="read-only" value={data.rating.rate} readOnly />
                         </Box>
                         <Box sx={{marginBottom:2}}>
                             <Typography variant="span" sx={{fontWeight:'fontWeightBold', fontSize:"20px"}}>Stock: {data?.stock}</Typography>
@@ -97,7 +100,8 @@ function ProductDetail() {
 
     const { id } = useParams();
     console.log("id", id)
-    const filteredData = data?.filter((item)=> item.id === id)
+    // eslint-disable-next-line eqeqeq
+    const filteredData = data?.filter((item)=> item.id == id)
     console.log("filter", filteredData)
 
 
